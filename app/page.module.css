@@ -42,20 +42,25 @@
   font-size: 1em;
   font-weight: bold;
   border: 1px solid black;
-  padding: 7px 25px;
+  padding: 7px 30px;
 }
 
 .section {
   padding: 30px 100px;
 }
 
-.container-btns {
-
+.containerBtns {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  gap: 11px;
+  margin-bottom: 20px;
 }
 
 .btns {
-  position: relative;
-  float: right;
+  background-color: white;
+  border: 1px solid black;
+  padding: 7px 25px;
 }
 
 .table {

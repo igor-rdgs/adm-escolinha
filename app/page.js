@@ -20,8 +20,10 @@ export default function Home() {
           <a href="#" className={styles.caixaUsuario}>Usuário</a>
         </nav>
         <section className={styles.section}>
-          <button className={styles.btns}>Nova Lição</button>
-          <button className={styles.btns}>Cadastrar aluno</button>
+          <div className={styles.containerBtns}>
+            <button className={styles.btns}>Nova Lição</button>
+            <button className={styles.btns}>Cadastrar aluno</button>
+          </div>
           <table className={styles.table}>
             <tr className={styles.tr}>
               <th className={styles.th}>Nome</th>
