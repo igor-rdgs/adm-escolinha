@@ -21,14 +21,15 @@ export default function Alunos() {
           <a href="#" className={styles.caixaUsuario}>Usuário</a>
         </nav>
         <section className={styles.section}>
-          <h2>Alfred Futterkiste</h2>
+          <h2>Alfredo Futterkiste</h2>
           <table className={styles.table}>
             <thead>
               <tr className={styles.tr}>
-                <th className={styles.th}>Data</th>
+                <th className={styles.th}>Data da Lição</th>
                 <th className={styles.th}>Fase</th>
                 <th className={styles.th}>Lição</th>
                 <th className={styles.th}>Observações</th>
+                <th className={styles.th}>Autorizante</th>
               </tr>
 
             </thead>
@@ -38,6 +39,7 @@ export default function Alunos() {
                 <td className={styles.td}>1</td>
                 <td className={styles.td}>1</td>
                 <td className={styles.td}>Aula teórica com instrumento</td>
+                <td className={styles.td}>Augusto Correa</td>
               </tr>
 
             </tbody>

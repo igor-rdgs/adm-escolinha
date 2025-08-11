@@ -31,13 +31,13 @@ export default function Alunos() {
                 <th className={styles.th}>Nome</th>
                 <th className={styles.th}>Instrumento</th>
                 <th className={styles.th}>Nível</th>
-                <th className={styles.th}>Histórico de lições</th>
+                <th className={styles.th}>Lições Aprovadas</th>
               </tr>
 
             </thead>
             <tbody>
               <tr className="styles.tr">
-                <td className={styles.td}>Alfred Futterkiste</td>
+                <td className={styles.td}>Alfredo Futterkiste</td>
                 <td className={styles.td}>Violino</td>
                 <td className={styles.td}>RJM</td>
                 <td className={styles.td}><Link href="./licoes">Visualizar Histórico</Link></td>

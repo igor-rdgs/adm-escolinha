@@ -30,14 +30,19 @@ export default function Instrutores() {
                 <th className={styles.th}>Nome</th>
                 <th className={styles.th}>Instrumento</th>
                 <th className={styles.th}>Cargo/Ministério</th>
+                <th className={styles.th}>E-mail</th>
+                <th className={styles.th}>Telefone</th>
+
               </tr>
           
             </thead>
             <tbody>
               <tr className="styles.tr">
-                <td className={styles.td}>Alfreds Futterkiste</td>
+                <td className={styles.td}>Augusto Correa</td>
                 <td className={styles.td}>Violino</td>
                 <td className={styles.td}>Músico</td>
+                <td className={styles.td}>augusto@exemplo.com</td>
+                <td className={styles.td}>(99)9999-9999</td>
               </tr>
               
             </tbody>
