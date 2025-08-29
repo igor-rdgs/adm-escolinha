@@ -39,6 +39,7 @@ export default function Index({children}) {
                 <Flex overflow='overlay' height='100%' align={'center'} flexDirection={"column"}>
                     {children}
                 </Flex>
+                
             </GridItem>
         </Grid>
   </>
