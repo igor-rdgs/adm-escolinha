@@ -1,15 +1,3 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Text,
-  Button,
-  Box
-} from '@chakra-ui/react'
 import { Grid, GridItem, Flex } from '@chakra-ui/react'
 
 
@@ -23,23 +11,20 @@ export default function Index({children}) {
             overflow={"hidden"}
             gap="0"
         >
-
-
             <GridItem area={'header'}>
-              <div style={{background: "red", height: 100, width: "100%"}}>
-
-              </div>
+                <div style={{background: "red", height: 100, width: "100%"}}>
+                    
+                </div>
             </GridItem>
             <GridItem area={'nav'}>
-            <div style={{background: "green", height: "100%", width: 200}}>
+                <div style={{background: "green", height: "100%", width: "100%"}}>
 
-</div>
+                </div>
             </GridItem>
             <GridItem overflow={'auto'} area={'main'}>
                 <Flex overflow='overlay' height='100%' align={'center'} flexDirection={"column"}>
                     {children}
                 </Flex>
-                
             </GridItem>
         </Grid>
   </>
