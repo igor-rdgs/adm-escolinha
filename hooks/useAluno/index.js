@@ -12,6 +12,7 @@ function useAluno() {
             return response.data
         } catch (err) {
             console.error("Erro ao criar aluno: ", err)
+            console.log('erro')
             setError(err.response?.data?.message || "Erro ao criar aluno")
             throw err
         } finally {
@@ -25,7 +26,7 @@ function useAluno() {
         try {
             const response = await api.put(`/aluno/${id}`, data)
             return response.data
-        } catch (error) {
+        } catch (err) {
             console.error("Erro ao atualizar aluno:", err);
             setError(err.response?.data?.message || "Erro ao atualizar aluno");
             throw err;

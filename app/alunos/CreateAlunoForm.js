@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Button, Input, Fieldset, Field } from "@chakra-ui/react";
-import { useAluno } from "../../hooks";
+import { useAluno, useAlunos } from "../../hooks";
 
 export default function CreateAlunoForm() {
     const { createAluno, loading, error } = useAluno();
+    const { reload } = useAlunos()
     const [form, setForm] = useState({
         nome: "",
         idade: "",
@@ -30,9 +31,9 @@ export default function CreateAlunoForm() {
                     comum: form.comum,
                     endereco: form.endereco || null,
                 });
-
                 alert("Aluno criado com sucesso!");
                 setForm({ nome: "", idade: "", comum: "", endereco: "" });
+                reload(); // se falhar, apenas loga
             } catch {
                 alert("Erro ao criar aluno");
             }

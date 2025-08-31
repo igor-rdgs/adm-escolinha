@@ -5,16 +5,18 @@ import CreateAlunoForm from './CreateAlunoForm';
 import EditarAlunoForm from './EditarAlunoForm';
 import AlunosTable from './AlunosTable';
 
+
 export default function Alunos() {
     const [alunoSelecionado, setAlunoSelecionado] = useState(null);
+    
     return (
         <LayoutAdmin>
             {alunoSelecionado ? (
-                <EditarAlunoForm aluno={alunoSelecionado} />
+                <EditarAlunoForm aluno={alunoSelecionado}  />
             ) : (
                 <CreateAlunoForm />
             )}
-            <AlunosTable onEdit={setAlunoSelecionado}/>
+            <AlunosTable onEdit={setAlunoSelecionado} />
         </LayoutAdmin>
     );
 }

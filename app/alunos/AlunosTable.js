@@ -49,7 +49,7 @@ export default function AlunosTable({ onEdit }) {
                             <Table.Cell>{aluno.comum}</Table.Cell>
                             <Table.Cell>{aluno.endereco}</Table.Cell>
                             <Table.Cell>
-                                <Flex>
+                                <Flex gap={2}>
                                     <Button colorScheme="blue" size="sm" onClick={() => onEdit(aluno)}>
                                         Editar
                                     </Button>

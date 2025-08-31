@@ -12,6 +12,7 @@ function useAlunos() {
             const response = await api.get("/aluno")
             setAlunos(response.data)
             setLoading(false)
+            setError(false)
         } catch {
             setError(true)
             setLoading(false)

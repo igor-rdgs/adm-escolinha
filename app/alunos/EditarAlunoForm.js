@@ -45,6 +45,7 @@ export default function EditarAlunoForm({ aluno }) {
 
                 alert("Aluno atualizado com sucesso!");
                 reload()
+
             } catch {
                 alert("Erro ao atualizar aluno");
             }
