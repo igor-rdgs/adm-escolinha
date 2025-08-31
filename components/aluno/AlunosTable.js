@@ -56,6 +56,14 @@ export default function AlunosTable({ onEdit }) {
                                     <Button colorScheme="red" size="sm" onClick={() => handleDelete(aluno.id)}>
                                         Remover
                                     </Button>
+                                    <Button
+                                        as="a"
+                                        href={`/alunos/${aluno.id}/jornadas`}
+                                        colorScheme="teal"
+                                        size="sm"
+                                    >
+                                        Jornadas
+                                    </Button>
                                 </Flex>
                             </Table.Cell>
                         </Table.Row>
