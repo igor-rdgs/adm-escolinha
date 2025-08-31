@@ -1,8 +1,8 @@
 import UiProvider from './uiProvider'
 
-function Index({children}) {
+function Index({ children }) {
   return <>
-  <UiProvider>
+    <UiProvider>
       {children}
     </UiProvider>
   </>
