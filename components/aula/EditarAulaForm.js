@@ -1,25 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button, Input, Fieldset, Field } from "@chakra-ui/react";
-import { useAula, useAulas } from "../../../../../hooks";
+import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
+import { useAula, useAulas } from "../../hooks";
 
 export default function EditarAulaForm({ alunoId, jornadaId, aula, onCancel }) {
   const { updateAula, loading, error } = useAula();
   const { reload } = useAulas(alunoId, jornadaId);
 
   const [form, setForm] = useState({
-    titulo: "",
-    descricao: "",
+    modulo: "",
+    numero: "",
     data: "",
+    instrutor: "",
   });
 
   useEffect(() => {
     if (aula) {
       setForm({
-        titulo: aula.titulo || "",
-        descricao: aula.descricao || "",
+        modulo: aula.modulo || "",
+        numero: aula.numero || "",
         data: aula.data || "",
+        instrutor: aula.instrutor || "",
       });
     }
   }, [aula]);
@@ -33,15 +35,16 @@ export default function EditarAulaForm({ alunoId, jornadaId, aula, onCancel }) {
     e.preventDefault();
 
     if (!form.titulo.trim()) {
-      alert("Título é obrigatório!");
+      alert("Módulo é obrigatório!");
       return;
     }
 
     try {
       await updateAula(alunoId, jornadaId, aula.id, {
-        titulo: form.titulo,
-        descricao: form.descricao || null,
+        modulo: form.modulo,
+        numero: form.numero || null,
         data: form.data || null,
+        instrutor: form.instrutor,
       });
 
       alert("Aula atualizada com sucesso!");
@@ -59,17 +62,17 @@ export default function EditarAulaForm({ alunoId, jornadaId, aula, onCancel }) {
 
         <Fieldset.Content>
           <Field.Root>
-            <Field.Label>Título</Field.Label>
+            <Field.Label>Módulo</Field.Label>
             <Input
-              name="titulo"
-              value={form.titulo}
+              name="modulo"
+              value={form.modulo}
               onChange={handleChange}
             />
 
-            <Field.Label>Descrição</Field.Label>
+            <Field.Label>Número</Field.Label>
             <Input
-              name="descricao"
-              value={form.descricao}
+              name="numero"
+              value={form.numero}
               onChange={handleChange}
             />
 
@@ -80,26 +83,34 @@ export default function EditarAulaForm({ alunoId, jornadaId, aula, onCancel }) {
               value={form.data}
               onChange={handleChange}
             />
+            
+            <Field.Label>Instrutor</Field.Label>
+            <Input
+              name="instrutor"
+              value={form.instrutor}
+              onChange={handleChange}
+            />
           </Field.Root>
         </Fieldset.Content>
 
-        <Button
-          type="submit"
-          alignSelf="flex-start"
-          colorScheme="green"
-          isLoading={loading}
-        >
-          Atualizar
-        </Button>
-        <Button
-          type="button"
-          alignSelf="flex-start"
-          colorScheme="gray"
-          ml={2}
-          onClick={onCancel}
-        >
-          Cancelar
-        </Button>
+        <Flex gap={2}>
+          <Button
+            type="submit"
+            alignSelf="flex-start"
+            colorScheme="green"
+            isLoading={loading}
+          >
+            Atualizar
+          </Button>
+          <Button
+            type="button"
+            alignSelf="flex-start"
+            colorScheme="gray"
+            onClick={onCancel}
+          >
+            Cancelar
+          </Button>
+        </Flex>
       </Fieldset.Root>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
