@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
 import { useAula, useAulas } from "../../hooks";
 
-export default function EditarAulaForm({ alunoId, jornadaId, aula, onCancel }) {
-  const { updateAula, loading, error } = useAula();
-  const { reload } = useAulas(alunoId, jornadaId);
+export default function EditarAulaForm({ alunoId, jornadaId, aula, reload, onUpdated, onCancel }) {
+  const { updateAula, loading, error } = useAula(alunoId, jornadaId);
 
   const [form, setForm] = useState({
     modulo: "",
@@ -32,16 +31,16 @@ export default function EditarAulaForm({ alunoId, jornadaId, aula, onCancel }) {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     if (!form.modulo.trim() || !form.numero.trim() || !form.data.trim() || !form.instrutor.trim()) {
-      e.preventDefault();
       alert("Campos obrigatórios!");
       return;
     } else {
       try {
-        await updateAula(alunoId, jornadaId, aula.id, form);
+        await updateAula(aula.id, form);
         alert("Aula atualizada com sucesso!");
         reload();
-        onCancel(); // volta para o estado de "criação"
+        onUpdated && onUpdated()
       } catch {
         alert("Erro ao atualizar aula");
       }

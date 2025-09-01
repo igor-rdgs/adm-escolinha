@@ -4,8 +4,9 @@ import { useState } from "react";
 import { Button, Input, Fieldset, Field } from "@chakra-ui/react";
 import { useAula } from "../../hooks";
 
-export default function CreateAulaForm({ alunoId, jornadaId, onCreated }) {
-  const { createAula, loading } = useAula();
+export default function CreateAulaForm({ alunoId, jornadaId, reload, onCreated }) {
+  const { createAula, loading } = useAula(alunoId, jornadaId);
+
   const [form, setForm] = useState({
     modulo: "",
     numero: "",
@@ -19,14 +20,19 @@ export default function CreateAulaForm({ alunoId, jornadaId, onCreated }) {
   };
 
   const handleSubmit = async (e) => {
-    if(!form.modulo.trim() || !form.numero.trim() || !form.data.trim() || !form.instrutor.trim()) {
-      e.preventDefault();
+    e.preventDefault();
+    if (!form.modulo.trim() || !form.numero.trim() || !form.data.trim() || !form.instrutor.trim()) {
       alert("Campos não informados!")
       return
-    } else {
-      await createAula(alunoId, jornadaId, form);
+    }
+    try {
+      await createAula(form);
+      alert("Aula criada com sucesso!");
       setForm({ modulo: "", numero: "", data: "", instrutor: "" });
-      onCreated();
+      reload();
+      onCreated()
+    } catch (error) {
+      alert("Erro ao criar aula");
     }
   };
 

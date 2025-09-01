@@ -1,23 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
 import { Table, Button, Flex, Spinner, Text } from "@chakra-ui/react";
-import { useAulas, useAula } from "../../hooks";
+import { useAula } from "../../hooks";
 
-export default function AulasTable({ alunoId, jornadaId, onEdit }) {
-  const { aulas, loading, error, getAulas } = useAulas();
-  const { deleteAula } = useAula();
-
-  useEffect(() => {
-    if (alunoId && jornadaId) {
-      getAulas(alunoId, jornadaId);
-    }
-  }, [alunoId, jornadaId]);
+export default function AulasTable({ alunoId, jornadaId, aulas, loading, error, onEdit, reload }) {
+  const { deleteAula } = useAula(alunoId, jornadaId);
 
   const handleDelete = async (id) => {
     if (confirm("Deseja remover esta aula?")) {
-      await deleteAula(alunoId, jornadaId, id);
-      getAulas(alunoId, jornadaId);
+      await deleteAula(id);
+      reload();
     }
   };
 
