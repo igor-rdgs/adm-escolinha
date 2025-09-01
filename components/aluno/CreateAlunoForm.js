@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Button, Input, Fieldset, Field } from "@chakra-ui/react";
-import { useAluno, useAlunos } from "../../hooks";
+import { useAluno } from "../../hooks";
 
-export default function CreateAlunoForm() {
+export default function CreateAlunoForm({ reload }) {
     const { createAluno, loading, error } = useAluno();
-    const { reload } = useAlunos()
+
     const [form, setForm] = useState({
         nome: "",
         idade: "",
@@ -19,25 +19,25 @@ export default function CreateAlunoForm() {
     };
 
     const handleSubmit = async (e) => {
+        e.preventDefault()
         if (!form.nome.trim() || !form.idade || !form.comum.trim()) {
-            e.preventDefault()
             alert("Campos não informados!")
             return
-        } else {
-            try {
-                await createAluno({
-                    nome: form.nome,
-                    idade: Number(form.idade),
-                    comum: form.comum,
-                    endereco: form.endereco || null,
-                });
-                alert("Aluno criado com sucesso!");
-                setForm({ nome: "", idade: "", comum: "", endereco: "" });
-                reload(); // se falhar, apenas loga
-            } catch {
-                alert("Erro ao criar aluno");
-            }
         }
+        try {
+            await createAluno({
+                nome: form.nome,
+                idade: Number(form.idade),
+                comum: form.comum,
+                endereco: form.endereco || null,
+            });
+            alert("Aluno criado com sucesso!");
+            setForm({ nome: "", idade: "", comum: "", endereco: "" });
+            reload(); // se falhar, apenas loga
+        } catch {
+            alert("Erro ao criar aluno");
+        }
+
     };
 
     return (

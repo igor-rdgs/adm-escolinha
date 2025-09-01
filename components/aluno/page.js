@@ -4,22 +4,20 @@ import { LayoutAdmin } from '../../layout'
 import CreateAlunoForm from './CreateAlunoForm';
 import EditarAlunoForm from './EditarAlunoForm';
 import AlunosTable from './AlunosTable';
+import { useAlunos } from "../../hooks";
 
 
 export default function Alunos() {
     const [alunoSelecionado, setAlunoSelecionado] = useState(null);
-
+    const { alunos, reload, loading, error } = useAlunos();
     return (
         <LayoutAdmin>
             {alunoSelecionado ? (
-                <EditarAlunoForm
-                    aluno={alunoSelecionado}
-                    onCancel={() => setAlunoSelecionado(null)}
-                />
+                <EditarAlunoForm aluno={alunoSelecionado} reload={reload} onCancel={() => setAlunoSelecionado(null)} />
             ) : (
-                <CreateAlunoForm />
+                <CreateAlunoForm reload={reload} />
             )}
-            <AlunosTable onEdit={setAlunoSelecionado} />
+            <AlunosTable alunos={alunos} loading={loading} error={error} onEdit={setAlunoSelecionado} reload={reload} />
         </LayoutAdmin>
     );
 }

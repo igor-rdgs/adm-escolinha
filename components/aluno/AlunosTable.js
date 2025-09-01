@@ -1,13 +1,13 @@
 "use client"
 import { Table, Flex, Button } from "@chakra-ui/react"
-import { useAlunos, useAluno } from '../../hooks'
+import { useAluno } from '../../hooks'
 
-export default function AlunosTable({ onEdit }) {
-    const { loading, alunos, error, reload } = useAlunos()
+export default function AlunosTable({ alunos, loading, error, onEdit, reload }) {
+
     const { deleteAluno } = useAluno();
 
     const handleDelete = async (id) => {
-        if(confirm("Deseja remover este aluno?")){
+        if (confirm("Deseja remover este aluno?")) {
             await deleteAluno(id);
             reload()
         }

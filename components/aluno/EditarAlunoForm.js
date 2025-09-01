@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
-import { useAluno, useAlunos } from "../../hooks";
+import { useAluno } from "../../hooks";
 
-export default function EditarAlunoForm({ aluno, onCancel }) {
+export default function EditarAlunoForm({ aluno, reload, onCancel }) {
     const { updateAluno, loading, error } = useAluno();
-    const { reload } = useAlunos()
     const [form, setForm] = useState({
         nome: "",
         idade: "",
@@ -17,9 +16,9 @@ export default function EditarAlunoForm({ aluno, onCancel }) {
     useEffect(() => {
         if (aluno) {
             setForm({
-                nome: aluno.nome || "",
-                idade: aluno.idade || "",
-                comum: aluno.comum || "",
+                nome: aluno.nome,
+                idade: aluno.idade,
+                comum: aluno.comum,
                 endereco: aluno.endereco || "",
             });
         }
@@ -31,25 +30,19 @@ export default function EditarAlunoForm({ aluno, onCancel }) {
     };
 
     const handleSubmit = async (e) => {
+        e.preventDefault()
         if (!form.nome.trim() || !form.idade || !form.comum.trim()) {
-            e.preventDefault()
+            alert("Campos não informados!")
             return
-        } else {
-            try {
-                await updateAluno(aluno.id, {
-                    nome: form.nome,
-                    idade: Number(form.idade),
-                    comum: form.comum || null,
-                    endereco: form.endereco || null,
-                });
+        }
+        try {
+            await updateAluno(aluno.id, form);
+            alert("Aluno atualizado com sucesso!");
+            reload(); // atualiza a tabela
+            onCancel(); // fecha o form
 
-                alert("Aluno atualizado com sucesso!");
-                reload()
-
-            } catch {
-                alert("Erro ao atualizar aluno");
-            }
-
+        } catch {
+            alert("Erro ao atualizar aluno");
         }
     };
 
