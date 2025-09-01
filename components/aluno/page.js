@@ -8,11 +8,14 @@ import AlunosTable from './AlunosTable';
 
 export default function Alunos() {
     const [alunoSelecionado, setAlunoSelecionado] = useState(null);
-    
+
     return (
         <LayoutAdmin>
             {alunoSelecionado ? (
-                <EditarAlunoForm aluno={alunoSelecionado}  />
+                <EditarAlunoForm
+                    aluno={alunoSelecionado}
+                    onCancel={() => setAlunoSelecionado(null)}
+                />
             ) : (
                 <CreateAlunoForm />
             )}

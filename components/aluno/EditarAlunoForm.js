@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button, Input, Fieldset, Field } from "@chakra-ui/react";
+import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
 import { useAluno, useAlunos } from "../../hooks";
 
-export default function EditarAlunoForm({ aluno }) {
+export default function EditarAlunoForm({ aluno, onCancel }) {
     const { updateAluno, loading, error } = useAluno();
     const { reload } = useAlunos()
     const [form, setForm] = useState({
@@ -82,15 +82,24 @@ export default function EditarAlunoForm({ aluno }) {
                         />
                     </Field.Root>
                 </Fieldset.Content>
-
-                <Button
-                    type="submit"
-                    alignSelf="flex-start"
-                    colorScheme="green"
-                    isLoading={loading}
-                >
-                    Atualizar
-                </Button>
+                <Flex gap={2}>
+                    <Button
+                        type="submit"
+                        alignSelf="flex-start"
+                        colorScheme="green"
+                        isLoading={loading}
+                    >
+                        Atualizar
+                    </Button>
+                    <Button
+                        type="button"
+                        alignSelf="flex-start"
+                        colorScheme="gray"
+                        onClick={onCancel}
+                    >
+                        Cancelar
+                    </Button>
+                </Flex>
             </Fieldset.Root>
 
             {error && <p style={{ color: "red" }}>{error}</p>}

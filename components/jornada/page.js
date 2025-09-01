@@ -15,6 +15,7 @@ export default function JornadasPage({ alunoId }) {
           alunoId={alunoId}
           jornada={jornadaSelecionada}
           onUpdated={() => setJornadaSelecionada(null)}
+          onCancel={() => setJornadaSelecionada(null)}
         />
       ) : (
         <CreateJornadaForm alunoId={alunoId} />

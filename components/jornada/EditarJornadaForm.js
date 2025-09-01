@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Button, Input, Fieldset, Field } from "@chakra-ui/react";
+import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
 import { useJornada } from "../../hooks";
 
-export default function EditarJornadaForm({ alunoId, jornada, onUpdated }) {
+export default function EditarJornadaForm({ alunoId, jornada, onUpdated, onCancel }) {
   const { updateJornada, loading, error } = useJornada(alunoId);
   const [form, setForm] = useState({
     instrumento: "",
@@ -60,9 +60,24 @@ export default function EditarJornadaForm({ alunoId, jornada, onUpdated }) {
             />
           </Field.Root>
         </Fieldset.Content>
-        <Button type="submit" colorScheme="green" isLoading={loading}>
-          Atualizar
-        </Button>
+        <Flex gap={2}>
+          <Button
+            type="submit"
+            alignSelf="flex-start"
+            colorScheme="green"
+            isLoading={loading}
+          >
+            Atualizar
+          </Button>
+          <Button
+            type="button"
+            alignSelf="flex-start"
+            colorScheme="gray"
+            onClick={onCancel}
+          >
+            Cancelar
+          </Button>
+        </Flex>
       </Fieldset.Root>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
