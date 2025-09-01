@@ -24,7 +24,6 @@ function useAulas() {
     aulas,
     error,
     getAulas,
-    reload: getAulas
   };
 }
 
