@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { LayoutAdmin } from '../../layout';
 import CreateAulaForm from "./CreateAulaForm";
+import EditarAulaForm from "./EditarAulaForm";
 import AulasTable from "./AulasTable";
 
 export default function AulasPage() {
