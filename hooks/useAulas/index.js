@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../service";
 
-function useAulas() {
+function useAulas(alunoId, jornadaId) {
   const [loading, setLoading] = useState(false);
   const [aulas, setAulas] = useState([]);
   const [error, setError] = useState(null);
 
-  const getAulas = async (alunoId, jornadaId) => {
+  const getAulas = async () => {
+    if (!alunoId && !jornadaId) return
     setLoading(true);
     try {
       const response = await api.get(`/aluno/${alunoId}/jornada/${jornadaId}/aula`);
@@ -19,11 +20,16 @@ function useAulas() {
     }
   };
 
+  useEffect(() => {
+    getAulas();
+  }, [alunoId, jornadaId])
+
   return {
     loading,
     aulas,
     error,
     getAulas,
+    reload: getAulas
   };
 }
 

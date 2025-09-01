@@ -1,11 +1,11 @@
 import { useState } from "react";
 import api from "../../service";
 
-function useAula() {
+function useAula(alunoId, jornadaId) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const createAula = async (alunoId, jornadaId, data) => {
+  const createAula = async (data) => {
     setLoading(true);
     try {
       const response = await api.post(`/aluno/${alunoId}/jornada/${jornadaId}/aula`, data);
@@ -19,7 +19,7 @@ function useAula() {
     }
   };
 
-  const updateAula = async (alunoId, jornadaId, aulaId, data) => {
+  const updateAula = async (aulaId, data) => {
     setLoading(true);
     try {
       const response = await api.put(`/aluno/${alunoId}/jornada/${jornadaId}/aula/${aulaId}`, data);
@@ -33,7 +33,7 @@ function useAula() {
     }
   };
 
-  const deleteAula = async (alunoId, jornadaId, aulaId) => {
+  const deleteAula = async (aulaId) => {
     setLoading(true);
     try {
       const response = await api.delete(`/aluno/${alunoId}/jornada/${jornadaId}/aula/${aulaId}`);
