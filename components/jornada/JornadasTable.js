@@ -1,9 +1,9 @@
 "use client";
 import { Table, Flex, Button } from "@chakra-ui/react";
-import { useJornadas, useJornada } from "../../hooks";
+import { useJornada } from "../../hooks";
 
-export default function JornadasTable({ alunoId, onEdit }) {
-  const { loading, jornadas, error, reload } = useJornadas(alunoId);
+export default function JornadasTable({ alunoId, jornadas, loading, error, onEdit, reload }) {
+  
   const { deleteJornada } = useJornada(alunoId);
 
   const handleDelete = async (id) => {

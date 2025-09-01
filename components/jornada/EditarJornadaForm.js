@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
 import { useJornada } from "../../hooks";
 
-export default function EditarJornadaForm({ alunoId, jornada, onUpdated, onCancel }) {
+export default function EditarJornadaForm({ alunoId, jornada, reload, onUpdated, onCancel }) {
   const { updateJornada, loading, error } = useJornada(alunoId);
+
   const [form, setForm] = useState({
     instrumento: "",
     status: "",
@@ -27,8 +28,8 @@ export default function EditarJornadaForm({ alunoId, jornada, onUpdated, onCance
   };
 
   const handleSubmit = async (e) => {
-    if (!form.data_inicio || !form.instrumento.trim() || !form.status.trim()) {
-      e.preventDefault()
+    e.preventDefault()
+    if (!form.instrumento.trim() || !form.status.trim() || !form.data_inicio.trim()) {
       alert("Campos não informados")
       return
     } else {
@@ -36,6 +37,7 @@ export default function EditarJornadaForm({ alunoId, jornada, onUpdated, onCance
         await updateJornada(jornada.id, form);
         alert("Jornada atualizada com sucesso!");
         onUpdated && onUpdated();
+        reload()
       } catch {
         alert("Erro ao atualizar jornada");
       }
