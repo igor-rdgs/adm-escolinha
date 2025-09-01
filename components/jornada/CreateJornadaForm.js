@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Button, Input, Fieldset, Field } from "@chakra-ui/react";
-import { useJornada } from "../../hooks";
+import { useJornada, useJornadas } from "../../hooks";
 
 export default function CreateJornadaForm({ alunoId, onCreated }) {
   const { createJornada, loading, error } = useJornada(alunoId);
+  const { reload } = useJornadas()
   const [form, setForm] = useState({
     instrumento: "",
     status: "",
@@ -22,7 +23,7 @@ export default function CreateJornadaForm({ alunoId, onCreated }) {
       await createJornada(form);
       alert("Jornada criada com sucesso!");
       setForm({ instrumento: "", status: "", data_inicio: "" });
-      onCreated && onCreated(); // recarrega tabela no pai
+      reload(); // recarrega tabela no pai
     } catch {
       alert("Erro ao criar jornada");
     }

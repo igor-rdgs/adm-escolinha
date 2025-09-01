@@ -36,11 +36,10 @@ export default function JornadasTable({ alunoId, onEdit }) {
               <Table.Cell>{jornada.status}</Table.Cell>
               <Table.Cell>{jornada.data_inicio}</Table.Cell>
               <Table.Cell>
-                <Flex>
+                <Flex gap={2}>
                   <Button
                     colorScheme="blue"
                     size="sm"
-                    mr={2}
                     onClick={() => onEdit(jornada)}
                   >
                     Editar
@@ -51,6 +50,14 @@ export default function JornadasTable({ alunoId, onEdit }) {
                     onClick={() => handleDelete(jornada.id)}
                   >
                     Remover
+                  </Button>
+                  <Button
+                    as="a"
+                    href={`/alunos/${alunoId}/jornadas/${jornada.id}/aulas`}
+                    colorScheme="teal"
+                    size="sm"
+                  >
+                    Aulas
                   </Button>
                 </Flex>
               </Table.Cell>
