@@ -36,7 +36,7 @@ export default function AulasPage({ alunoId, jornadaId }) {
     return (
         <LayoutAdmin>
             <h1 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>
-                Aulas de{" "}
+                Jornada de{" "}
                 {jornada ? jornada.instrumento : `#${jornadaId}`} do{" "}
                 {aluno ? aluno.nome : `#${alunoId}`}
             </h1>
