@@ -18,14 +18,19 @@ export default function CreateJornadaForm({ alunoId, onCreated }) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await createJornada(form);
-      alert("Jornada criada com sucesso!");
-      setForm({ instrumento: "", status: "", data_inicio: "" });
-      reload(); // recarrega tabela no pai
-    } catch {
-      alert("Erro ao criar jornada");
+    if (!form.data_inicio || !form.instrumento.trim() || !form.status.trim()) {
+      e.preventDefault()
+      alert("Campos não informados")
+      return
+    } else {
+      try {
+        await createJornada(form);
+        alert("Jornada criada com sucesso!");
+        setForm({ instrumento: "", status: "", data_inicio: "" });
+        reload(); // recarrega tabela no pai
+      } catch {
+        alert("Erro ao criar jornada");
+      }
     }
   };
 

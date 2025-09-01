@@ -18,10 +18,10 @@ export default function EditarAulaForm({ alunoId, jornadaId, aula, onCancel }) {
   useEffect(() => {
     if (aula) {
       setForm({
-        modulo: aula.modulo || "",
-        numero: aula.numero || "",
-        data: aula.data || "",
-        instrutor: aula.instrutor || "",
+        modulo: aula.modulo,
+        numero: aula.numero,
+        data: aula.data,
+        instrutor: aula.instrutor,
       });
     }
   }, [aula]);
@@ -32,27 +32,21 @@ export default function EditarAulaForm({ alunoId, jornadaId, aula, onCancel }) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!form.titulo.trim()) {
-      alert("Módulo é obrigatório!");
+    if (!form.modulo.trim() || !form.numero.trim() || !form.data.trim() || !form.instrutor.trim()) {
+      e.preventDefault();
+      alert("Campos obrigatórios!");
       return;
+    } else {
+      try {
+        await updateAula(alunoId, jornadaId, aula.id, form);
+        alert("Aula atualizada com sucesso!");
+        reload();
+        onCancel(); // volta para o estado de "criação"
+      } catch {
+        alert("Erro ao atualizar aula");
+      }
     }
 
-    try {
-      await updateAula(alunoId, jornadaId, aula.id, {
-        modulo: form.modulo,
-        numero: form.numero || null,
-        data: form.data || null,
-        instrutor: form.instrutor,
-      });
-
-      alert("Aula atualizada com sucesso!");
-      reload();
-      onCancel(); // volta para o estado de "criação"
-    } catch {
-      alert("Erro ao atualizar aula");
-    }
   };
 
   return (

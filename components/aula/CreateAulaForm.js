@@ -19,10 +19,15 @@ export default function CreateAulaForm({ alunoId, jornadaId, onCreated }) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    await createAula(alunoId, jornadaId, form);
-    setForm({ modulo: "", numero: "", data: "", instrutor: "" });
-    onCreated?.();
+    if(!form.modulo.trim() || !form.numero.trim() || !form.data.trim() || !form.instrutor.trim()) {
+      e.preventDefault();
+      alert("Campos não informados!")
+      return
+    } else {
+      await createAula(alunoId, jornadaId, form);
+      setForm({ modulo: "", numero: "", data: "", instrutor: "" });
+      onCreated();
+    }
   };
 
   return (

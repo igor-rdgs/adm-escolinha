@@ -27,15 +27,20 @@ export default function EditarJornadaForm({ alunoId, jornada, onUpdated, onCance
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await updateJornada(jornada.id, form);
-      alert("Jornada atualizada com sucesso!");
-      onUpdated && onUpdated();
-    } catch {
-      alert("Erro ao atualizar jornada");
+    if (!form.data_inicio || !form.instrumento.trim() || !form.status.trim()) {
+      e.preventDefault()
+      alert("Campos não informados")
+      return
+    } else {
+      try {
+        await updateJornada(jornada.id, form);
+        alert("Jornada atualizada com sucesso!");
+        onUpdated && onUpdated();
+      } catch {
+        alert("Erro ao atualizar jornada");
+      }
+    };
     }
-  };
 
   return (
     <form onSubmit={handleSubmit}>
