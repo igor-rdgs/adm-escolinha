@@ -7,8 +7,10 @@ export default function AlunosTable({ onEdit }) {
     const { deleteAluno } = useAluno();
 
     const handleDelete = async (id) => {
-        await deleteAluno(id);
-        reload()
+        if(confirm("Deseja remover este aluno?")){
+            await deleteAluno(id);
+            reload()
+        }
     };
 
 
