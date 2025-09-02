@@ -2,11 +2,14 @@
 
 import { useAlunos, useAluno } from "@/hooks/index.js";
 import { LayoutAdmin } from "@/layout";
-import { Flex, Card } from "@chakra-ui/react"
-import { Table } from "@chakra-ui/react"
 import TableComponent from '../../components/dataDisplay/table/index.js'
 import Modal from '../../components/modal/index.js'
+import CreateAlunoForm from "@/components/aluno/CreateAlunoForm.js";
+import EditarAlunoForm from "@/components/aluno/EditarAlunoForm.js";
 import {
+	Flex, 
+	Card,
+	Table,
 	Button,
 	Dialog,
 	Portal,
@@ -32,29 +35,39 @@ const headers_table = ["id", "Nome", "Idade", "Comum", "Endereco", "Acao"]
 export default function Page() {
 	const { alunos, error, loading, reload } = useAlunos()
 
-	if (loading) {
-        return <>
-            Carregando
-        </>
-    }
+	const { deleteAluno } = useAluno();
 
-    if (error) {
-        return <>
-            erro ao carregar pagina
-            <button onClick={reload}>
-                carregar novamente
-            </button>
-        </>
-    }
+    const handleDelete = async (id) => {
+        if (confirm("Deseja remover este aluno?")) {
+            await deleteAluno(id);
+            reload()
+        }
+    };
+
+	if (loading) {
+		return <>
+			Carregando
+		</>
+	}
+
+	if (error) {
+		return <>
+			erro ao carregar pagina
+			<button onClick={reload}>
+				carregar novamente
+			</button>
+		</>
+	}
 
 	return (
 		<>
 			<LayoutAdmin>
 				<Modal triggerLabel="Adicionar Aluno" cancelLabel="Cancelar" confirmLabel="Adicionar">
-					<p>Aqui você pode colocar qualquer conteúdo, como texto ou formulários.</p>
+					<CreateAlunoForm reload={reload} />
 				</Modal>
 
-				<Card.Root width={"100%"} padding={10} >
+
+				<Card.Root width={"100%"} padding={10} marginTop={5}>
 					<Flex width={"100%"} >
 						{alunos && alunos.data && <>
 							<TableComponent headers={headers_table}  >
@@ -65,7 +78,24 @@ export default function Page() {
 										<Table.Cell>{aluno.idade}</Table.Cell>
 										<Table.Cell>{aluno.comum}</Table.Cell>
 										<Table.Cell>{aluno.endereco}</Table.Cell>
-										<Table.Cell cursor={"pointer"} onClick={() => {}}>Detalhes</Table.Cell>
+										<Table.Cell cursor={"pointer"} onClick={() => { }}>
+											<Flex gap={2}>
+												<Modal triggerLabel="Editar" cancelLabel="Cancelar" confirmLabel="Atualizar" >
+													<EditarAlunoForm aluno={aluno} reload={reload} onCancel={() => setAlunoSelecionado(null)} />
+												</Modal>
+												<Button colorScheme="red" size="sm" onClick={() => handleDelete(aluno.id)}>
+													Remover
+												</Button>
+												<Button
+													as="a"
+													href={`/alunos/${aluno.id}/jornadas`}
+													colorScheme="teal"
+													size="sm"
+												>
+													Jornadas
+												</Button>
+											</Flex>
+										</Table.Cell>
 									</Table.Row>
 								))}
 							</TableComponent>

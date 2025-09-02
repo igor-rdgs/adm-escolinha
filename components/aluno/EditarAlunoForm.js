@@ -84,14 +84,6 @@ export default function EditarAlunoForm({ aluno, reload, onCancel }) {
                     >
                         Atualizar
                     </Button>
-                    <Button
-                        type="button"
-                        alignSelf="flex-start"
-                        colorScheme="gray"
-                        onClick={onCancel}
-                    >
-                        Cancelar
-                    </Button>
                 </Flex>
             </Fieldset.Root>
 

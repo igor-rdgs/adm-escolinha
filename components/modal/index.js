@@ -35,7 +35,7 @@ export default function GenericDialog({
 
             <Dialog.Body>{children}</Dialog.Body>
 
-            <Dialog.Footer>
+            {/* <Dialog.Footer> */}
               {/* Fechar */}
               {/* <Dialog.CloseTrigger asChild>
                 <Button variant="outline" mr={3}>
@@ -44,10 +44,10 @@ export default function GenericDialog({
               </Dialog.CloseTrigger> */}
 
               {/* Confirmar */}
-              <Button colorScheme="blue" onClick={onConfirm}>
+              {/* <Button colorScheme="blue" onClick={onConfirm}>
                 {confirmLabel}
               </Button>
-            </Dialog.Footer>
+            </Dialog.Footer> */}
           </Dialog.Content>
         </Dialog.Positioner>
       </Portal>
