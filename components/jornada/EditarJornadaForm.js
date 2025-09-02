@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
 import { useJornada } from "../../hooks";
 
-export default function EditarJornadaForm({ alunoId, jornada, reload, onUpdated, onCancel }) {
+export default function EditarJornadaForm({ alunoId, jornada, reload }) {
   const { updateJornada, loading, error } = useJornada(alunoId);
 
   const [form, setForm] = useState({
@@ -36,7 +36,6 @@ export default function EditarJornadaForm({ alunoId, jornada, reload, onUpdated,
       try {
         await updateJornada(jornada.id, form);
         alert("Jornada atualizada com sucesso!");
-        onUpdated && onUpdated();
         reload()
       } catch {
         alert("Erro ao atualizar jornada");
@@ -75,14 +74,6 @@ export default function EditarJornadaForm({ alunoId, jornada, reload, onUpdated,
             isLoading={loading}
           >
             Atualizar
-          </Button>
-          <Button
-            type="button"
-            alignSelf="flex-start"
-            colorScheme="gray"
-            onClick={onCancel}
-          >
-            Cancelar
           </Button>
         </Flex>
       </Fieldset.Root>

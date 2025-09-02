@@ -11,8 +11,6 @@ import {
 	Card,
 	Table,
 	Button,
-	Dialog,
-	Portal,
 } from "@chakra-ui/react"
 
 
@@ -81,7 +79,7 @@ export default function Page() {
 										<Table.Cell cursor={"pointer"} onClick={() => { }}>
 											<Flex gap={2}>
 												<Modal triggerLabel="Editar" cancelLabel="Cancelar" confirmLabel="Atualizar" >
-													<EditarAlunoForm aluno={aluno} reload={reload} onCancel={() => setAlunoSelecionado(null)} />
+													<EditarAlunoForm aluno={aluno} reload={reload} />
 												</Modal>
 												<Button colorScheme="red" size="sm" onClick={() => handleDelete(aluno.id)}>
 													Remover

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
 import { useAula, useAulas } from "../../hooks";
 
-export default function EditarAulaForm({ alunoId, jornadaId, aula, reload, onUpdated, onCancel }) {
+export default function EditarAulaForm({ alunoId, jornadaId, aula, reload, onCancel }) {
   const { updateAula, loading, error } = useAula(alunoId, jornadaId);
 
   const [form, setForm] = useState({
@@ -40,7 +40,6 @@ export default function EditarAulaForm({ alunoId, jornadaId, aula, reload, onUpd
         await updateAula(aula.id, form);
         alert("Aula atualizada com sucesso!");
         reload();
-        onUpdated && onUpdated()
       } catch {
         alert("Erro ao atualizar aula");
       }

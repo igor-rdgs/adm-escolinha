@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Button, Input, Fieldset, Field, Flex } from "@chakra-ui/react";
 import { useAluno } from "../../hooks";
 
-export default function EditarAlunoForm({ aluno, reload, onCancel }) {
+export default function EditarAlunoForm({ aluno, reload }) {
     const { updateAluno, loading, error } = useAluno();
     const [form, setForm] = useState({
         nome: "",
@@ -39,8 +39,6 @@ export default function EditarAlunoForm({ aluno, reload, onCancel }) {
             await updateAluno(aluno.id, form);
             alert("Aluno atualizado com sucesso!");
             reload(); // atualiza a tabela
-            onCancel(); // fecha o form
-
         } catch {
             alert("Erro ao atualizar aluno");
         }

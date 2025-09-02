@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Input, Fieldset, Field } from "@chakra-ui/react";
 import { useAula } from "../../hooks";
 
-export default function CreateAulaForm({ alunoId, jornadaId, reload, onCreated }) {
+export default function CreateAulaForm({ alunoId, jornadaId, reload }) {
   const { createAula, loading } = useAula(alunoId, jornadaId);
 
   const [form, setForm] = useState({
@@ -30,7 +30,6 @@ export default function CreateAulaForm({ alunoId, jornadaId, reload, onCreated }
       alert("Aula criada com sucesso!");
       setForm({ modulo: "", numero: "", data: "", instrutor: "" });
       reload();
-      onCreated()
     } catch (error) {
       alert("Erro ao criar aula");
     }

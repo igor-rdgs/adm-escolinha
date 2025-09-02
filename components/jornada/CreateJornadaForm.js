@@ -56,7 +56,7 @@ export default function CreateJornadaForm({ alunoId, reload }) {
             />
           </Field.Root>
         </Fieldset.Content>
-        <Button type="submit" colorScheme="blue" isLoading={loading}>
+        <Button type="submit" alignSelf="flex-start" colorScheme="blue" isLoading={loading}>
           Salvar
         </Button>
       </Fieldset.Root>
