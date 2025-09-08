@@ -7,7 +7,7 @@ import Modal from '../../components/modal/index.js'
 import CreateAlunoForm from "@/components/aluno/CreateAlunoForm.js";
 
 import {
-	Flex, 
+	Flex,
 	Card,
 	Table,
 	Button,
@@ -24,12 +24,12 @@ export default function Page() {
 
 	const { deleteAluno } = useAluno();
 
-    const handleDelete = async (id) => {
-        if (confirm("Deseja remover este aluno?")) {
-            await deleteAluno(id);
-            return reload()
-        }
-    };
+	const handleDelete = async (id) => {
+		if (confirm("Deseja remover este aluno?")) {
+			await deleteAluno(id);
+			return reload()
+		}
+	};
 
 	if (loading) {
 		return <>
@@ -49,18 +49,18 @@ export default function Page() {
 	return (
 		<>
 			<LayoutAdmin>
-				
+
 
 
 				<Flex width={"100%"} padding={10} marginTop={5} alignContent={"center"} justifyContent={"center"} >
-					
+
 					<Flex width={"80%"} flexDirection={"column"} >
 						<Flex width={"100%"} justifyContent={"flex-end"} marginBottom={5}>
 							<Modal triggerLabel="Adicionar Aluno" cancelLabel="Cancelar" confirmLabel="Adicionar">
-					<CreateAlunoForm reload={reload} />
-				</Modal>
+								<CreateAlunoForm reload={reload} />
+							</Modal>
 						</Flex>
-						
+
 						{alunos && alunos.data && <>
 							<TableComponent headers={headers_table}  >
 								{alunos.data.map((aluno) => (

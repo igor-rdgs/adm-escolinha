@@ -45,7 +45,7 @@ function useJornada(alunoId) {
     }
   };
 
-  const getJornadaById = async (jornadaId) => {
+  const getByJornada = async (jornadaId) => {
     setLoading(true);
     try {
       const response = await api.get(`/aluno/${alunoId}/jornada/${jornadaId}`);
@@ -65,7 +65,7 @@ function useJornada(alunoId) {
     createJornada,
     updateJornada,
     deleteJornada,
-    getJornadaById,
+    getByJornada,
   };
 }
 

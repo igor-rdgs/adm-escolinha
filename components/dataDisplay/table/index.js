@@ -10,7 +10,7 @@ function Index({ headers = [], children }) {
           <Table.Row bg="bg.subtle">
             {headers.map((item) => (
 
-              <Table.ColumnHeader>{item}</Table.ColumnHeader>
+              <Table.ColumnHeader key={item}>{item}</Table.ColumnHeader>
 
             ))}
 
