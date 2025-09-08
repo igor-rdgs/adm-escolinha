@@ -1,23 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '@/service';
 
-function useJornada(alunoId) {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+function useJornada(alunoId, jornadaId = undefined) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState()
 
-    const createJornada = async (data) => {
-        setLoading(true);
-        try {
-            const response = await api.post(`/aluno/${alunoId}/jornada`, data);
-            return response.data;
-        } catch (err) {
-            console.error("Erro ao criar jornada:", err);
-            setError(err.response?.data?.message || "Erro ao criar jornada");
-            throw err;
-        }
+  const createJornada = async (data) => {
+    setLoading(true);
+    try {
+      const response = await api.post(`/aluno/${alunoId}/jornada`, data);
+      return response.data;
+    } catch (err) {
+      console.error("Erro ao criar jornada:", err);
+      setError(err.response?.data?.message || "Erro ao criar jornada");
+      throw err;
     }
+  }
 
-    const updateJornada = async (jornadaId, data) => {
+  const updateJornada = async (jornadaId, data) => {
     setLoading(true);
     try {
       const response = await api.put(`/aluno/${alunoId}/jornada/${jornadaId}`, data);
@@ -49,7 +50,8 @@ function useJornada(alunoId) {
     setLoading(true);
     try {
       const response = await api.get(`/aluno/${alunoId}/jornada/${jornadaId}`);
-      return response.data;
+      setData(response.data)
+      return
     } catch (err) {
       console.error("Erro ao buscar jornada:", err);
       setError(err.response?.data?.message || "Erro ao buscar jornada");
@@ -59,6 +61,12 @@ function useJornada(alunoId) {
     }
   };
 
+  useEffect(() => {
+    if (jornadaId) {
+      getByJornada(jornadaId)
+    }
+  }, [jornadaId])
+
   return {
     loading,
     error,
@@ -66,6 +74,7 @@ function useJornada(alunoId) {
     updateJornada,
     deleteJornada,
     getByJornada,
+    data,
   };
 }
 
