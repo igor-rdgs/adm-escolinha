@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { useAlunos, useAluno } from "@/hooks/index.js";
+import { useRouter } from "next/navigation";
 import { LayoutAdmin } from "@/layout";
 import TableComponent from '../../components/dataDisplay/table/index.js'
 import Modal from '../../components/modal/index.js'
@@ -15,11 +17,18 @@ import {
 } from "@chakra-ui/react"
 
 
-
-
 const headers_table = ["id", "Nome", "Idade", "Comum", "Endereco", "Acao"]
 
 export default function Page() {
+	const router = useRouter()
+
+	useEffect(() => {
+		const isAuthenticated = localStorage.getItem("isAuthenticated");
+		if (!isAuthenticated) {
+			router.push("/login");
+		}
+	}, [router]);
+
 	const { alunos, error, loading, reload } = useAlunos()
 
 	const { deleteAluno } = useAluno();

@@ -1,6 +1,9 @@
-import { Grid, GridItem, Flex, Text } from '@chakra-ui/react'
+import { Grid, GridItem, Flex, Text, Button } from '@chakra-ui/react'
+import { useRouter } from "next/navigation"
 
 export default function Index({ children }) {
+  const router = useRouter()
+
   return (
     <Grid
       templateAreas={`"header" "main"`}
@@ -11,9 +14,18 @@ export default function Index({ children }) {
       gap="0"
     >
       <GridItem area="header">
-        <div style={{ background: "#4d4d4d0f", height: 100, width: "100%" , display: "flex", alignItems: "center", justifyContent: "center"}}>
-      <Text as='h1' fontSize="20px" fontWeight={800} >    Congregação cristã no brasil </Text>
+        <div style={{ background: "#4d4d4d0f", height: 100, width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Text as='h1' fontSize="20px" fontWeight={800} >Congregação Cristã no Brasil</Text>
+          <Button position={'absolute'} left={'84%'}
+            onClick={() => {
+              localStorage.removeItem("isAuthenticated");
+              router.push("/login");
+            }}
+          >
+            Sair
+          </Button>
         </div>
+
       </GridItem>
 
       <GridItem overflow="auto" area="main">

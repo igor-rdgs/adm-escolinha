@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { useAluno, useJornada } from "@/hooks/index.js";
 import { LayoutAdmin } from "@/layout";
@@ -16,11 +18,19 @@ import {
     Field,
     Input,
 } from "@chakra-ui/react"
-import { useEffect, useState } from "react";
+
 
 const headers_table = ["id", "Instrumento", "Status", "Data de Início", "Ação"]
 
 export default function Page() {
+    const router = useRouter()
+    
+        useEffect(() => {
+            const isAuthenticated = localStorage.getItem("isAuthenticated");
+            if (!isAuthenticated) {
+                router.push("/login");
+            }
+        }, [router]);
 
     const [nome, setNome] = useState("")
     const [idade, setIdade] = useState("")
