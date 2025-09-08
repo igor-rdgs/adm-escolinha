@@ -5,27 +5,16 @@ import { LayoutAdmin } from "@/layout";
 import TableComponent from '../../components/dataDisplay/table/index.js'
 import Modal from '../../components/modal/index.js'
 import CreateAlunoForm from "@/components/aluno/CreateAlunoForm.js";
-import EditarAlunoForm from "@/components/aluno/EditarAlunoForm.js";
+
 import {
 	Flex, 
 	Card,
 	Table,
 	Button,
+	Box
 } from "@chakra-ui/react"
 
 
-const DATA_MOCK = [
-	{
-		"id": 1,
-		"nome": "vitor melo",
-		"idade": 19,
-		"comum": "Taguatinga",
-		"endereco": "qnl 01 bloco c",
-		"created_at": "2025-08-23T19:55:33.147Z",
-		"updated_at": "2025-08-23T19:55:33.147Z",
-		"jornadas": []
-	}
-]
 
 
 const headers_table = ["id", "Nome", "Idade", "Comum", "Endereco", "Acao"]
@@ -38,7 +27,7 @@ export default function Page() {
     const handleDelete = async (id) => {
         if (confirm("Deseja remover este aluno?")) {
             await deleteAluno(id);
-            reload()
+            return reload()
         }
     };
 
@@ -60,13 +49,18 @@ export default function Page() {
 	return (
 		<>
 			<LayoutAdmin>
-				<Modal triggerLabel="Adicionar Aluno" cancelLabel="Cancelar" confirmLabel="Adicionar">
+				
+
+
+				<Flex width={"100%"} padding={10} marginTop={5} alignContent={"center"} justifyContent={"center"} >
+					
+					<Flex width={"80%"} flexDirection={"column"} >
+						<Flex width={"100%"} justifyContent={"flex-end"} marginBottom={5}>
+							<Modal triggerLabel="Adicionar Aluno" cancelLabel="Cancelar" confirmLabel="Adicionar">
 					<CreateAlunoForm reload={reload} />
 				</Modal>
-
-
-				<Card.Root width={"100%"} padding={10} marginTop={5}>
-					<Flex width={"100%"} >
+						</Flex>
+						
 						{alunos && alunos.data && <>
 							<TableComponent headers={headers_table}  >
 								{alunos.data.map((aluno) => (
@@ -78,19 +72,19 @@ export default function Page() {
 										<Table.Cell>{aluno.endereco}</Table.Cell>
 										<Table.Cell cursor={"pointer"} onClick={() => { }}>
 											<Flex gap={2}>
-												<Modal triggerLabel="Editar" cancelLabel="Cancelar" confirmLabel="Atualizar" >
+												{/* <Modal triggerLabel="Editar" cancelLabel="Cancelar" confirmLabel="Atualizar" >
 													<EditarAlunoForm aluno={aluno} reload={reload} />
-												</Modal>
+												</Modal> */}
 												<Button colorScheme="red" size="sm" onClick={() => handleDelete(aluno.id)}>
 													Remover
 												</Button>
 												<Button
 													as="a"
-													href={`/alunos/${aluno.id}/jornadas`}
+													href={`/alunos/${aluno.id}`}
 													colorScheme="teal"
 													size="sm"
 												>
-													Jornadas
+													detalhes
 												</Button>
 											</Flex>
 										</Table.Cell>
@@ -99,7 +93,7 @@ export default function Page() {
 							</TableComponent>
 						</>}
 					</Flex>
-				</Card.Root>
+				</Flex>
 			</LayoutAdmin>
 		</>
 	);

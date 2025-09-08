@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import api from '../../service/index.js'
 
-function useAluno() {
+function useAluno(alunoId = undefined) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [data, setData] = useState()
 
     const createAluno = async (data) => {
         setLoading(true)
@@ -55,7 +56,8 @@ function useAluno() {
 
         try {
             const response = await api.get(`/aluno/${id}`);
-            return response.data;
+            setData(response.data)
+            return 
         } catch (err) {
             console.error("Erro ao listar aluno:", err);
             setError(err.response?.data?.message || "Erro ao buscar aluno");
@@ -65,6 +67,11 @@ function useAluno() {
         }
     }
 
+    useEffect(() => {
+if(alunoId) {
+    getByAluno(alunoId)
+}
+    }, [alunoId])
 
     return {
         loading,
@@ -72,7 +79,7 @@ function useAluno() {
         createAluno,
         updateAluno,
         deleteAluno,
-        getByAluno
+        getByAluno, data
     }
 
 
